@@ -6,11 +6,9 @@ const AUTH_URL = "https://accounts.spotify.com/authorize?client_id=fa944ccfaef84
 
 export default function Authorize() {
 
-    const user = useSelector(selectUser);
-
     return (
         <div className='flex flex-col bg-spotifyDark h-screen justify-center items-center'>
-            <p className='text-white mb-5'>Hey {user.displayName}! To go to your dashboard, click the button below to authenticate with Spotify. Don't worry, all sensitive data is handled on
+            <p className='text-white mb-5'> To go to your dashboard, click the button below to authenticate with Spotify. Don't worry, all sensitive data is handled on
             the server and never stored anywhere.</p> 
             <a data-aos='fade-down' data-aos-delay='900' className="bg-spotifyGreen hover:bg-buttonHover transition duration-300 ease-in-out text-white rounded-full px-5 py-3 hover:no-underline" href={AUTH_URL}>
                 Login With Spotify
