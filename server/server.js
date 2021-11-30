@@ -9,7 +9,14 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 9000;
+
+// app.use(express.static(path.join(__dirname, 'build')));
+
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+
 
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken
@@ -36,6 +43,7 @@ app.post("/refresh", (req, res) => {
 
 app.post("/login", (req, res) => {
   const code = req.body.code
+  console.log(code)
   const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,
@@ -52,13 +60,9 @@ app.post("/login", (req, res) => {
       })
     })
     .catch(err => {
-      console.log(err)
       res.sendStatus(400)
+      console.log('there was an error')
     })
 })
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-}
-
-app.listen(port,() => console.log(`Listening at port: ${port}`))
+app.listen(port, () => console.log(`listening at port: ${port}`))
